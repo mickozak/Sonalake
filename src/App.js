@@ -1,25 +1,18 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+
+import { FormTask } from './tasks/form-task/FormTask';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    return (
+        <>
+            <h1>Sonalake front-end developer recruitment task</h1>
+            <p><i>If you wish to use TypeScript, you are more than welcome to. You will need to convert the application files to TS.</i></p>
+            
+            <hr/>
+
+            <FormTask />
+        </>
+    );
 }
 
 export default App;
