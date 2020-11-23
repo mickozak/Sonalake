@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/Sonalake/static/css/main.8c8b27cf.chunk.css",
+    "main.js": "/Sonalake/static/js/main.f9e30203.chunk.js",
+    "main.js.map": "/Sonalake/static/js/main.f9e30203.chunk.js.map",
+    "runtime-main.js": "/Sonalake/static/js/runtime-main.67cbb56b.js",
+    "runtime-main.js.map": "/Sonalake/static/js/runtime-main.67cbb56b.js.map",
+    "static/js/2.8db44e63.chunk.js": "/Sonalake/static/js/2.8db44e63.chunk.js",
+    "static/js/2.8db44e63.chunk.js.map": "/Sonalake/static/js/2.8db44e63.chunk.js.map",
+    "static/js/3.4f203da6.chunk.js": "/Sonalake/static/js/3.4f203da6.chunk.js",
+    "static/js/3.4f203da6.chunk.js.map": "/Sonalake/static/js/3.4f203da6.chunk.js.map",
+    "index.html": "/Sonalake/index.html",
+    "static/css/main.8c8b27cf.chunk.css.map": "/Sonalake/static/css/main.8c8b27cf.chunk.css.map",
+    "static/js/2.8db44e63.chunk.js.LICENSE.txt": "/Sonalake/static/js/2.8db44e63.chunk.js.LICENSE.txt",
+    "static/media/logo.6ce24c58.svg": "/Sonalake/static/media/logo.6ce24c58.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.67cbb56b.js",
+    "static/js/2.8db44e63.chunk.js",
+    "static/css/main.8c8b27cf.chunk.css",
+    "static/js/main.f9e30203.chunk.js"
+  ]
+}
