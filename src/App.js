@@ -1,17 +1,24 @@
 import React from 'react';
 
-import { FormTask } from './tasks/form-task/FormTask';
+import {Provider} from 'react-redux';
+import {Container} from 'reactstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
-function App() {
+import AppNavbar from './components/AppNavbar';
+import UsersList from './components/UserList';
+
+import FormTask from './tasks/form-task/FormTask';
+import store from './store';
+
+const App = () => {
     return (
-        <>
-            <h1>Sonalake front-end developer recruitment task</h1>
-            <p><i>If you wish to use TypeScript, you are more than welcome to. You will need to convert the application files to TS.</i></p>
-            
-            <hr/>
-
-            <FormTask />
-        </>
+        <Provider store={store}>
+            <AppNavbar/>
+            <Container>
+                <UsersList/>
+                <FormTask />
+            </Container>
+        </Provider>
     );
 }
 

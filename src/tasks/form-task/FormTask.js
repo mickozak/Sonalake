@@ -1,42 +1,250 @@
-import React from 'react';
-import { FormTaskComplete } from './FormTaskComplete';
-import img from './assets/form-goal.png';
+import React, { Component } from 'react';
 
-export const FormTask = () => {
-    return (
-        <div>
-            <p>For this task you need to implement the form shown in the image below the logic for saving the below (<a href={img} target="_blank" rel="noopener noreferrer">{img}</a>) as well as the following validation rules:</p>
-            <ul>
-                <li>First Name and Last Name are mandatory fields.</li>
-                <li>User Inactivity Date is mandatory ONLY if the User Type is set to "Inactive".</li>
-                <li>User Inactivity Date value must have the format <code>YYYY-MM-DD</code> (This format should also be configurable).</li>
-                <li>User Inactivity Date is only valid if it contains a date that is in the past.</li>
-                <li>Validation messages should appear if a field is invalid and was touched.</li>
-            </ul>
+import {
+    Button,
+    Form,
+    FormGroup,
+    Label,
+    Input
+} from 'reactstrap';
+import uuid from 'uuid/dist/v1';
+import { connect } from 'react-redux'
 
-            <p>Additional Requirements</p>
-            <ul>
-                <li>The task should be implemented inside the component found at: <code>/src/tasks/form-task/FormTaskComplete/FormTaskComplete.js</code>.</li>
-                <li>When submitting the form, you should use the <code>saveUserForm</code> function found in <code>/src/tasks/form-task/FormTaskComplete/form-api.js</code>.</li>
-                <li>You may create as many sub-components as you deem necessary.</li>
-                <li>When styling the form, feel free to use CSS, SCSS, React-JSS, or other.</li>
-                <li>Feel free to include any UI/UX improvements for the form.</li>
-                <li><strong>Do not use any 3rd party form libraries to complete this task.</strong></li>
-                <li><strong>Testing is required for this task.</strong> The testing-library has been included in this project, but please feel free to use any other testing tools (such as enzyme)</li>
-            </ul>
+import { addUser } from '../../actions/userActions';
+import {saveUserForm} from './FormTaskComplete/form-api';
 
-            <hr />
+class FormTask extends Component {
 
+    state = {
+        name: '',
+        surname: '',
+        birthday: '',
+        userType: '',
+        inactivityDate: '',
+        error: {
+            name: '',
+            surname: '',
+            birthday: '',
+            inactivityDate: ''
+        }
+    }
+
+    onChange = (e) => {
+        this.setState({[e.target.name]: e.target.value})
+    }
+
+    onSubmit = (e) => {
+        e.preventDefault();
+
+        //Validation name - mandatory
+
+        if (!this.state.name.match(/[a-zA-Z0-9-,]+/)) {
+            this.setState(prevState => {
+                let error = Object.assign({}, prevState.error);
+                error.name = 'This field is mandatory.';
+                return { error };
+            })
+        } else {
+            this.setState(prevState => {
+                let error = Object.assign({}, prevState.error);
+                error.name = '';
+                return { error };
+            })
+        }
+
+        //Validation surname - mandatory
+
+        if (!this.state.surname.match(/[a-zA-Z0-9-,]+/)) {
+            this.setState(prevState => {
+                let error = Object.assign({}, prevState.error);
+                error.surname = 'This field is mandatory.';
+                return { error };
+            })
+        } else {
+            this.setState(prevState => {
+                let error = Object.assign({}, prevState.error);
+                error.surname = '';
+                return { error };
+            })
+        }
+
+        //Validation - date format
+
+        if (!this.state.birthday.match(/^\d{4}-\d{2}-\d{2}$/)) {
+            this.setState(prevState => {
+                let error = Object.assign({}, prevState.error);
+                error.birthday = 'This field accepts the format YYYY-MM-DD';
+                return { error };
+            })
+        } else {
+            this.setState(prevState => {
+                let error = Object.assign({}, prevState.error);
+                error.birthday = '';
+                return { error };
+            })
+        }
+
+        //Validation - date time
+
+        if (this.state.userType === 'Active') {
+
+            let currentDate = new Date();
+            let currentDay = currentDate.getDate();
+            let currentMonth = currentDate.getMonth() + 1;
+            let currentYear = currentDate.getFullYear();
+
+            let userYear = this.state.inactivityDate.slice(0, 4)
+            let userYearNumber = parseInt(userYear)
+
+            let userMonth = this.state.inactivityDate.slice(5, 7)
+            let userMonthNumber = parseInt(userMonth)
+
+            let userDay = this.state.inactivityDate.slice(8, 10)
+            let userDayNumber = parseInt(userDay)
+
+            if (userYearNumber <= currentYear) {
+                this.setState(prevState => {
+                    let error = Object.assign({}, prevState.error);
+                    error.inactivityDate = '';
+                    return { error };
+                })
+            } else {
+                this.setState(prevState => {
+                    let error = Object.assign({}, prevState.error);
+                    error.inactivityDate = 'Must be completed with a date from the past.';
+                    return { error };
+                })
+            }
+
+            if (userMonthNumber <= currentMonth && userYearNumber == currentYear) {
+                this.setState(prevState => {
+                    let error = Object.assign({}, prevState.error);
+                    error.inactivityDate = '';
+                    return { error };
+                })
+            } else if (userMonthNumber <= 12 && userYearNumber < currentYear) {
+                this.setState(prevState => {
+                    let error = Object.assign({}, prevState.error);
+                    error.inactivityDate = '';
+                    return { error };
+                })
+            } else {
+                this.setState(prevState => {
+                    let error = Object.assign({}, prevState.error);
+                    error.inactivityDate = 'Must be completed with a date from the past.';
+                    return { error };
+                })
+            }
+
+            if (userDayNumber <= currentDay && userMonthNumber <= currentMonth && userYearNumber == currentYear) {
+                this.setState(prevState => {
+                    let error = Object.assign({}, prevState.error);
+                    error.inactivityDate = '';
+                    return { error };
+                })
+            } else if (userDayNumber <= 31 && userMonthNumber <= 12 && userYearNumber < currentYear) {
+                this.setState(prevState => {
+                    let error = Object.assign({}, prevState.error);
+                    error.inactivityDate = '';
+                    return { error };
+                })
+            } else if (userDayNumber <= 31 && userMonthNumber < currentMonth && userYearNumber == currentYear) {
+                this.setState(prevState => {
+                    let error = Object.assign({}, prevState.error);
+                    error.inactivityDate = '';
+                    return { error };
+                })
+            } else {
+                this.setState(prevState => {
+                    let error = Object.assign({}, prevState.error);
+                    error.inactivityDate = 'Must be completed with a date from the past.';
+                    return { error };
+                })
+            }
+        }
+
+        const newUser = {
+            id: uuid(),
+            name: this.state.name,
+            surname: this.state.surname,
+            birthday: this.state.birthday,
+            user: this.state.userType,
+            inactivity: this.state.inactivityDate
+        }
+
+        if(this.state.name!==''&&this.state.surname!==''){
+            this.props.addUser(newUser);
+            saveUserForm();
+        }
+    }
+
+    render() {
+        return (
             <div>
-                <div style={{ display: 'flex' }}>
-                    <div style={{ width: 'calc(50% - 1px)', height: 435, borderRight: '1px solid grey', padding: 10 }}>
-                        <FormTaskComplete />
-                    </div>
-                    <div style={{ width: '50%', height: 435, padding: 10 }}>
-                        <img src={img} alt="" style={{ maxWidth: '100%' }} />
-                    </div>
-                </div>
+                <Form onSubmit={this.onSubmit}>
+                    <FormGroup style={{ marginTop: '2rem' }}>
+                        <h2 style={{ display: 'flex', justifyContent: 'center' }}>Personal Info</h2>
+                        <Label for="name">First Name:</Label>
+                        <Input
+                            type="text"
+                            name="name"
+                            id="name"
+                            placeholder="Add name"
+                            onChange={this.onChange}
+                        />
+                        {this.state.error.name != '' ? <div><small style={{ color: 'red' }}>{this.state.error.name}</small><br /></div> : null}
+                        <Label for="name">Last Name:</Label>
+                        <Input
+                            type="text"
+                            name="surname"
+                            id="surname"
+                            placeholder="Add surname"
+                            onChange={this.onChange}
+                        />
+                        {this.state.error.surname != '' ? <div><small style={{ color: 'red' }}>{this.state.error.surname}</small><br /></div> : null}
+                        <Label for="name">Birthday:</Label>
+                        <Input
+                            type="text"
+                            name="birthday"
+                            id="birthday"
+                            placeholder="YYYY-MM-DD"
+                            onChange={this.onChange}
+                        />
+                        {this.state.error.birthday != '' ? <div><small style={{ color: 'red' }}>{this.state.error.birthday}</small><br /></div> : null}
+                        <h2 style={{ display: 'flex', justifyContent: 'center' }}>User Management</h2>
+                        <Label for="name">User Type:</Label>
+                        <Input type="select" name='userType' id='userType' onChange={this.onChange}>
+                            <option value="" selected>Choose your option</option>
+                            <option value="Active">Active</option>
+                            <option value="Inactive">Inactive</option>
+                        </Input>
+                        <Label for="name">User Inactivity Date:</Label>
+                        <Input
+                            type="text"
+                            name="inactivityDate"
+                            id="inactivityDate"
+                            disabled={this.state.userType == 'Inactive' ? true : false}
+                            placeholder="YYYY-MM-DD"
+                            onChange={this.onChange}
+                        />
+                        {this.state.error.inactivityDate != '' && this.state.userType == 'Active' ? <div><small style={{ color: 'red' }}>{this.state.error.inactivityDate}</small><br /></div> : null}
+                        <Button
+                            color="primary"
+                            dark
+                            style={{ marginTop: '2rem' }}
+                            block
+                        >
+                            Send
+                        </Button>
+                    </FormGroup>
+                </Form>
             </div>
-        </div>
-    );
-};
+        )
+    }
+}
+
+const mapStateToProps = state => ({
+    user: state.user
+});
+
+export default connect(mapStateToProps, { addUser })(FormTask);
