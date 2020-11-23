@@ -1,18 +1,20 @@
 {
   "files": {
-    "main.js": "/Sonalake/static/js/main.8a47cbcb.chunk.js",
-    "main.js.map": "/Sonalake/static/js/main.8a47cbcb.chunk.js.map",
+    "main.js": "/Sonalake/static/js/main.4f668227.chunk.js",
+    "main.js.map": "/Sonalake/static/js/main.4f668227.chunk.js.map",
     "runtime-main.js": "/Sonalake/static/js/runtime-main.db261700.js",
     "runtime-main.js.map": "/Sonalake/static/js/runtime-main.db261700.js.map",
-    "static/js/2.fafa4e28.chunk.js": "/Sonalake/static/js/2.fafa4e28.chunk.js",
-    "static/js/2.fafa4e28.chunk.js.map": "/Sonalake/static/js/2.fafa4e28.chunk.js.map",
+    "static/css/2.1a02f21c.chunk.css": "/Sonalake/static/css/2.1a02f21c.chunk.css",
+    "static/js/2.90ae04be.chunk.js": "/Sonalake/static/js/2.90ae04be.chunk.js",
+    "static/js/2.90ae04be.chunk.js.map": "/Sonalake/static/js/2.90ae04be.chunk.js.map",
     "index.html": "/Sonalake/index.html",
-    "static/js/2.fafa4e28.chunk.js.LICENSE.txt": "/Sonalake/static/js/2.fafa4e28.chunk.js.LICENSE.txt",
-    "static/media/form-goal.27e2fdfa.png": "/Sonalake/static/media/form-goal.27e2fdfa.png"
+    "static/css/2.1a02f21c.chunk.css.map": "/Sonalake/static/css/2.1a02f21c.chunk.css.map",
+    "static/js/2.90ae04be.chunk.js.LICENSE.txt": "/Sonalake/static/js/2.90ae04be.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.db261700.js",
-    "static/js/2.fafa4e28.chunk.js",
-    "static/js/main.8a47cbcb.chunk.js"
+    "static/css/2.1a02f21c.chunk.css",
+    "static/js/2.90ae04be.chunk.js",
+    "static/js/main.4f668227.chunk.js"
   ]
 }
