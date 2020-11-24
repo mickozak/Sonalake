@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+
 import {
     Container, 
     ListGroup, 
@@ -10,8 +11,10 @@ import {
     TransitionGroup
 } from 'react-transition-group';
 import {connect} from 'react-redux';
-import {getUsers, deleteUser} from '../actions/userActions';
 import PropTypes from 'prop-types';
+
+import {getUsers, deleteUser} from '../actions/userActions';
+
 
 class UsersList extends Component{
 
@@ -37,6 +40,7 @@ class UsersList extends Component{
                                         color="danger" 
                                         size="sm" 
                                         onClick={this.onDeleteClick.bind(this, id)}
+                                        style={{marginRight: '0.5rem'}}
                                     > 
                                         &times;
                                     </Button>
@@ -47,14 +51,14 @@ class UsersList extends Component{
                     </TransitionGroup>
                 </ListGroup>
             </Container>
-        )
-    }
-}
+        );
+    };
+};
 
 UsersList.propTypes = {
     getUsers: PropTypes.func.isRequired,
     user: PropTypes.object.isRequired
-}
+};
 
 const mapStateToProps = (state) => ({
     user: state.user

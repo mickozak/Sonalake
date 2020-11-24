@@ -7,8 +7,9 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import AppNavbar from './components/AppNavbar';
 import UsersList from './components/UserList';
 
-import FormTask from './tasks/form-task/FormTask';
+import FormTaskComplete from './tasks/form-task/FormTaskComplete/FormTaskComplete';
 import store from './store';
+//import FormTask from './tasks/form-task/FormTask';
 
 const App = () => {
     return (
@@ -16,8 +17,9 @@ const App = () => {
             <AppNavbar/>
             <Container>
                 <UsersList/>
-                <FormTask />
+                <FormTaskComplete />
             </Container>
+            {/* <FormTask/> */}
         </Provider>
     );
 }

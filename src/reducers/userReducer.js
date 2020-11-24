@@ -1,11 +1,12 @@
 import uuid from 'uuid/dist/v1';
+
 import {GET_USERS,DELETE_USER,ADD_USER} from '../actions/types'; 
  
 const initialState = {
     users: [
         {id: uuid(),name: 'Michał', surname: 'Kozak', birthday: '1989-05-18'}
     ]
-}
+};
 
 export default function(state=initialState, action){
     switch(action.type){
@@ -22,7 +23,7 @@ export default function(state=initialState, action){
             return {
                 ...state,
                 users: [action.payload, ...state.users]
-            }
+            };
         default:
             return state
     };

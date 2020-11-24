@@ -1,4 +1,5 @@
 import React from 'react';
+
 import{
     Navbar,
     NavbarBrand,
@@ -16,7 +17,7 @@ const AppNavbar = () => {
                 </Container>
             </Navbar>
         </div>
-        );
-}
+    );
+};
 
 export default AppNavbar;
